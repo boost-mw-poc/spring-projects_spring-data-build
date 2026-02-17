@@ -33,5 +33,8 @@ runs:
         add-pr-comment: false
     - name: Set Env Variables
       shell: bash
+      env:
+        BUILD_USER_NAME: ${{ env.BUILD_USER_NAME }}
+        ORIG_MAVEN_OPTS: ${{ env.MAVEN_OPTS }}
       run: |
-        echo "MAVEN_OPTS=-Duser.name=${{ env.BUILD_USER_NAME }} ${{ env.MAVEN_OPTS }}" >> "$GITHUB_ENV"
+        echo "MAVEN_OPTS=-Duser.name=${BUILD_USER_NAME} ${ORIG_MAVEN_OPTS}" >> "$GITHUB_ENV"
